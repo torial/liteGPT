@@ -77,11 +77,11 @@ enough differences exist between the first 90% and last 10% of a story that over
 ![Validation Loss Example](charts/validation_loss_by_lr.png)
 
 ## Next Steps
-[] Explore Quantization
-[] Explore strategies for training LLM on a single GPU
-[] Explore a larger corpus
-[] Explore bigram and trigram prediction abilities
-[] Explore tokens as words
-[] Identify and implement other transformer strategies in research
-[] Explore implmenting the full encoder/decoder architecture of GPT-2
-[] ...
+- [ ] Explore Quantization
+- [ ] Explore strategies for training LLM on a single GPU
+- [ ] Explore a larger corpus
+- [ ] Explore bigram and trigram prediction abilities
+- [ ] Explore tokens as words
+- [ ] Identify and implement other transformer strategies in research
+- [ ] Explore implmenting the full encoder/decoder architecture of GPT-2
+- [ ] ...
