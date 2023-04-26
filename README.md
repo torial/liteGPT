@@ -47,3 +47,25 @@ Learning Rates, Batch Size, and Layers have the most impact on training on time.
 Learning Rate and Embeddings should be as higher, but Batch Size and Layers should be lower.
 ![Hyper Parameter Feature Importance](charts/consolidated_hyper_parameter_importance_including_training_time.png)
 
+## Visualizing the meaning of Training Loss
+| Phase | Loss |                                                                          Generated Text (100 Characters) |
+|------------|---------------------------------------------------------------------------------------------------------:|
+| 1 |  3.14       | tKyp\niq orataVn s ar\nWs â€™s  ffhe o atdea sefn ffedio t Hcw\nti Esxa ta?iAirahor9hiolshed alkses  tdi 
+| 1 | 3.01       | ShedOta. wsc\nrI\n/. hu isamld bnf sd TAal\nctg"atoyoqstâ€¢eN Oa)oton t:eMsn aseoS â‚¬ond atndnâ€œEhaAon !n
+| 1 | 2.75       | t at.eus Tathemeous Zhinoup bellavrmat af taed his hhdZTed hheced le HHhe\nGrecres Heelellif Gro asof |
+| 1 | 2.5        | nigh wray charts Phesa banie areegisratclat nd ye awer cerapowm tesloraDgend ck hiy anod cema sthemo |
+| 1 | 2.25       | not brethe wat outeit kn yommm to." "Meis\nGra.\nTHed Thel a, avish ist. sour w abllamamu s thedilmate |
+| 1 | 2.0        | Thacked aleg, is nubly as osk the\nthrould newe as hund Mn more geld tok! OI A Thumane tuone of mou a |
+| 1 | 1.75       | 43M%OEE;S."\nPEAN, be smill mpely back one ck nolreage to stend\nbe dart, to as eapes witribling. If w |
+| 1 | 1.5        | have feemans ther!" Ting bared to his shoNm foure\nhim maeuw suppeded sho con and the mace. The the c |
+| 1 | 1.35       | Your fur."\n"Noot ther you must proct human to the was powed operfuren\nwith them, he sail. I have the |
+| 2 | 1.25       | smiled, "I am please Roi."\nNamal's suhmed and seemed, "Why with\nit boght a lours const our pilate to |
+| 2 | 1.0        | stompodabes quickly heart. Juckles and for King Anayah.\n65\nCHAPTE ROF I â€“ THE JUDGE THE PETERATE ent |
+| 2 | 0.75       | Elyong Ri abanslave. If we want, we could fifly\nmay Yah Elyon!" He could smiled.\nThe tuons row soldi |
+| 2 | 0.52       | odden whis worships.\nTuon till help us were maeuw and wait filled with arcries\nwere scrime were nang |
+| 2 | 0.3        | "Yes, sir!" Gor ran to their ran attacked through his\ntroops out and slaves. The cubs were surroundi |
+| 3 | 0.25       | Clans and expect them to -Biber ence is and everyone, he surprised\nas the remaining warriors said, a |
+| 3 | 0.15 | a smell of thonishmen. After 62\nCHAPTER V â€“ A DESPERATE GAMBIT\ncellent chief, who is great among the |
+| 3 | 0.11 | worships.\n"Yes, the first to roop if their growling. He knew he muster and sat\ndown again.\nGratta ha |
+| 4 | 0.10 | taskmaster winced. Whether it was from the implied\nyoursuing through the camp toward him. He stood\na |
+
