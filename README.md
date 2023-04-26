@@ -37,3 +37,13 @@ Based on the constraints (the number of heads is 1/64th of the embedding size) t
 ### By Layers
 6 Layers were slightly better than 4 layers.
 ![Layers Comparision](charts/training_loss_by_layers.png)
+
+## Hyper Parameter Feature Importance for Training Loss
+Learning Rates and Embeddings/Heads are most important for quality.
+![Hyper Parameter Feature Importance](charts/consolidated_hyper_parameter_importance.png)
+
+## Hyper Parameter Feature Importance for Training Loss and Training Time
+Learning Rates, Batch Size, and Layers have the most impact on training on time.  This suggest to that to find the best quality training time,
+Learning Rate and Embeddings should be as higher, but Batch Size and Layers should be lower.
+![Hyper Parameter Feature Importance](charts/consolidated_hyper_parameter_importance_including_training_time.png)
+
