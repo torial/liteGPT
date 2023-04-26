@@ -26,16 +26,24 @@ def get_stat_info(df: pd.DataFrame):
     print(f"Pearson:\n{r_features}")
 
 
-def display_feature_importance(df: pd.DataFrame):
+def display_feature_importance(df: pd.DataFrame, include_training_time: bool):
     df = df.copy()
     clf = RandomForestRegressor()
-    y = df[["final_loss", "total_training_time"]]
+    if include_training_time:
+        y = df[["final_loss", "total_training_time"]]
+    else:
+        y = df[["final_loss"]]
+
     df.drop(columns=["final_loss", "total_training_time", "Size", "Generated Text"] +
             [col for col in df.columns if "Step " in col], inplace=True)
     clf.fit(df, y)
     plt.figure(figsize=(12,12))
     plt.bar(df.columns, clf.feature_importances_)
     plt.xticks(rotation=45)
+    if include_training_time:
+        plt.title("Feature Importance for Loss and Training Time")
+    else:
+        plt.title("Feature Importance for Loss")
     plt.show()
 
 
@@ -106,7 +114,8 @@ if __name__ == '__main__':
     get_stat_info(df)
     print("-----"*5)
 
-    display_feature_importance(df)
+    display_feature_importance(df, include_training_time=True)
+    display_feature_importance(df, include_training_time=False)
     print("-----"*5)
 
     dfs = []
