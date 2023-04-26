@@ -69,3 +69,19 @@ Learning Rate and Embeddings should be as higher, but Batch Size and Layers shou
 | 3 | 0.11 | worships.\n"Yes, the first to roop if their growling. He knew he muster and sat\ndown again.\nGratta ha           |
 | 4 | 0.10 | taskmaster winced. Whether it was from the implied\nyoursuing through the camp toward him. He stood\na            |
 
+## Validation Loss (example)
+The training approach used was to take the first 90% of the novella for training data, 10% for validation data.  
+At some point the validation loss stops dropping and rising, and normally this would indicate overfitting but I suspect
+enough differences exist between the first 90% and last 10% of a story that overfitting doesn't occur at step 1,000 as indicated in the chart.
+
+![Validation Loss Example](charts/validation_loss_by_lr.png)
+
+## Next Steps
+[] Explore Quantization
+[] Explore strategies for training LLM on a single GPU
+[] Explore a larger corpus
+[] Explore bigram and trigram prediction abilities
+[] Explore tokens as words
+[] Identify and implement other transformer strategies in research
+[] Explore implmenting the full encoder/decoder architecture of GPT-2
+[] ...
