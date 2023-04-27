@@ -160,7 +160,7 @@ class Block(nn.Module):
         return x
 
 
-class BigramLanguageModel(nn.Module):
+class UnigramLanguageModel(nn.Module):
 
     def __init__(self, hp: HyperParameters):
         super().__init__()
@@ -356,7 +356,9 @@ GPT-3 175B              175.0B      96          12288       96          128     
         yield hp_nano
 
 
-
+def print_total_parameters(m: nn.Module):
+    total_params = sum(p.numel() for p in m.parameters())
+    print(f"Total Parameters: {total_params:,}")
 
 if __name__ == "__main__":
     from contextlib import redirect_stdout
@@ -366,8 +368,9 @@ if __name__ == "__main__":
     total_hyperparameters_phase3 = 3 * 2 * 2 * 2 * 2 - 3 # 45 possible experiments, 5000 iterations
     total_hyperparameters_phase4 = 8 # 10_000 iterations
     with open('phase4/output.txt', 'w') as f:
-        with redirect_stdout(f):
+        #with redirect_stdout(f):
             for hp in tqdm(get_hyper_parameters_search_phase4(), total=total_hyperparameters_phase4):
+            #for hp in get_hyper_parameters_search_phase1():
                 print(f"BEGINNING ({time()}): {hp.name}")
                 if hp.batch_size > 256:
                     hp.batch_size = 128
@@ -378,7 +381,8 @@ if __name__ == "__main__":
                 xb, yb = get_batch_iter('train', hp)
 
                 # default los expected: = -ln (1/vocab_size)
-                m = BigramLanguageModel(hp)
+                m = UnigramLanguageModel(hp)
+                print_total_parameters(m)
                 m = m.to(hp.device)
                 #m = torch.compile(m) NOT supported in Windows
 

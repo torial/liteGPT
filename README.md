@@ -13,10 +13,10 @@ Changes made from the original video version of the nanoGPT code include:
 ---
 ## Experimentation Phases
 To explore hyper parameters impact on the GPT framework, four phases were run against a novella (which has 112,191 letters in length):
-1) 1316 hyper parameter permutations for 500 iterations of training time.
-2) From the 50 best experiments, the hyper parameters were narrowed down to 320 permutations running for 1,500 iterations of training.
-3) From the best of those experiments, 45 permutations running for 5,000 iterations.
-4) 8 permutations of the best hyper parameter settings for 10,000 iterations.
+1) 1316 hyper parameter permutations for 500 iterations of training time. Models are between 112K and 42.7M parameters. 
+2) From the 50 best experiments, the hyper parameters were narrowed down to 320 permutations running for 1,500 iterations of training.  Models are between 3.6M and 42.7M parameters.
+3) From the best of those experiments, 45 permutations running for 5,000 iterations.  Models are between 12.7M and 42.7M parameters.
+4) 8 permutations of the best hyper parameter settings for 10,000 iterations.  Models are between 19M and 42.7M parameters.
 
 ## Training Loss
 ### By Learning Rate
@@ -77,6 +77,7 @@ enough differences exist between the first 90% and last 10% of a story that over
 ![Validation Loss Example](charts/validation_loss_by_lr.png)
 
 ## Next Steps
+- [ ] Try low parameter count models for longer iterations
 - [ ] Explore Quantization
 - [ ] Explore strategies for training LLM on a single GPU
 - [ ] Explore a larger corpus
