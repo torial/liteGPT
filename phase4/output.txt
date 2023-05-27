@@ -1,1 +1,0 @@
-BEGINNING (1682482943.6194854): Baseline LR(0.0006) Heads(12) Embeddings(768) Block Size(128) Batch Size(48) Layers(6)

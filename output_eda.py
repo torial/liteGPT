@@ -106,7 +106,8 @@ if __name__ == '__main__':
     curdir = Path(".")
 
     dfs =[]
-    for file_name in curdir.glob("**/output.csv"):
+    #for file_name in curdir.glob("**/output.csv"):
+    for file_name in curdir.glob("output.csv"):
         df = pd.read_csv(file_name)
         dfs.append(df)
 
@@ -119,7 +120,8 @@ if __name__ == '__main__':
     print("-----"*5)
 
     dfs = []
-    for file_name in curdir.glob("**/output_steps.csv"):
+    #for file_name in curdir.glob("**/output_steps.csv"):
+    for file_name in curdir.glob("output_steps.csv"):
         df = pd.read_csv(file_name)
         dfs.append(df)
 

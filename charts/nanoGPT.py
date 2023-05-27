@@ -360,6 +360,73 @@ def print_total_parameters(m: nn.Module):
     total_params = sum(p.numel() for p in m.parameters())
     print(f"Total Parameters: {total_params:,}")
 
+
+def get_hyper_parameters_search_small_models():
+    """
+MODEL                   n_params    n_layers    n_embed     n_heads     head_size       batch_size      learning_rate
+GPT-3 Small             125M        12          768         12          64              0.5M            6.0e-4
+GPT-3 Medium            350M        24          1024        16          64              0.5M            3.0e-4
+GPT-3 Large             760M        24          1536        16          96              0.5M            2.5e-4
+GPT-3 XL                1.3B        24          2048        24          128             1M              2.0e-4
+GPT-3 2.7B              2.7B        32          2560        32          80              1M              1.6e-4
+GPT-3 6.7B              6.7B        32          4096        32          128             2M              1.2e-4
+GPT-3 13B               13.0B       40          5140        40          128             2M              1.0e-4
+GPT-3 175B              175.0B      96          12288       96          128             3.2M            0.6e-4
+
+    """
+    for lr in [6e-4, 3e-4, 2.5e-4, 2e-4, 1.6e-4, 1e-4, 0.6e-4]:
+        for n_embed in [64, 128, 192, 256, 384, 512, 768]:  # must be multiples of 64
+            batch_size = 32
+            block_size = 32
+            n_layer = 2
+            n_heads = n_embed // 64  # IMPORTANT: This must be a fixed ratio or matmul errors will occur
+            hp_nano.learning_rate = lr
+            hp_nano.n_head = n_heads
+            hp_nano.n_embed = n_embed
+            hp_nano.block_size = block_size
+            hp_nano.batch_size = batch_size
+            hp_nano.n_layer = n_layer
+            hp_nano.eval_interval = 100  # this is for quick testing
+            hp_nano.max_iters = 20_000  # for quick testing... exploring the idea of hyper-parameter tuning that quick fails... then could
+            # continue w/ the training if the combination made the cut ?
+
+            hp_nano.name = f"Baseline LR({lr}) Heads({n_heads}) Embeddings({n_embed}) Block Size({block_size}) Batch Size({batch_size}) Layers({n_layer})"
+            yield hp_nano
+
+
+def get_hyper_parameters_search_small_models_phase2():
+    """
+MODEL                   n_params    n_layers    n_embed     n_heads     head_size       batch_size      learning_rate
+GPT-3 Small             125M        12          768         12          64              0.5M            6.0e-4
+GPT-3 Medium            350M        24          1024        16          64              0.5M            3.0e-4
+GPT-3 Large             760M        24          1536        16          96              0.5M            2.5e-4
+GPT-3 XL                1.3B        24          2048        24          128             1M              2.0e-4
+GPT-3 2.7B              2.7B        32          2560        32          80              1M              1.6e-4
+GPT-3 6.7B              6.7B        32          4096        32          128             2M              1.2e-4
+GPT-3 13B               13.0B       40          5140        40          128             2M              1.0e-4
+GPT-3 175B              175.0B      96          12288       96          128             3.2M            0.6e-4
+
+    """
+    for lr in [6e-4, 3e-4, 2.5e-4, 2e-4, 1.6e-4, 1e-4]:
+        for n_embed in [768, 1024]:  # must be multiples of 64
+            batch_size = 32
+            block_size = 32
+            n_layer = 2
+            n_heads = n_embed // 64  # IMPORTANT: This must be a fixed ratio or matmul errors will occur
+            hp_nano.learning_rate = lr
+            hp_nano.n_head = n_heads
+            hp_nano.n_embed = n_embed
+            hp_nano.block_size = block_size
+            hp_nano.batch_size = batch_size
+            hp_nano.n_layer = n_layer
+            hp_nano.eval_interval = 100  # this is for quick testing
+            hp_nano.max_iters = 30_000  # for quick testing... exploring the idea of hyper-parameter tuning that quick fails... then could
+            # continue w/ the training if the combination made the cut ?
+
+            hp_nano.name = f"Baseline LR({lr}) Heads({n_heads}) Embeddings({n_embed}) Block Size({block_size}) Batch Size({batch_size}) Layers({n_layer})"
+            yield hp_nano
+
+
 if __name__ == "__main__":
     from contextlib import redirect_stdout
     from tqdm import tqdm
@@ -367,9 +434,11 @@ if __name__ == "__main__":
     total_hyperparameters_phase2 = 4 * 3 * 3 * 3 * 3 - 4 # 320 possible experiments, 1500 iterations
     total_hyperparameters_phase3 = 3 * 2 * 2 * 2 * 2 - 3 # 45 possible experiments, 5000 iterations
     total_hyperparameters_phase4 = 8 # 10_000 iterations
-    with open('phase4/output.txt', 'w') as f:
-        #with redirect_stdout(f):
-            for hp in tqdm(get_hyper_parameters_search_phase4(), total=total_hyperparameters_phase4):
+    total_hyperparameters_small_models = 7 * 7 # 49 possible experiments, 20_000 iterations
+    total_hyperparameters_small_models_phase2 = 6 * 2 # 12 possible experiments, 30_000 iterations
+    with open('output.txt', 'w') as f:
+        with redirect_stdout(f):
+            for hp in tqdm(get_hyper_parameters_search_small_models_phase2(), total=total_hyperparameters_small_models_phase2):
             #for hp in get_hyper_parameters_search_phase1():
                 print(f"BEGINNING ({time()}): {hp.name}")
                 if hp.batch_size > 256:

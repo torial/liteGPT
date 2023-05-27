@@ -179,7 +179,8 @@ class ProcessOutput:
 if __name__ == '__main__':
     from pathlib import Path
     curdir = Path(".")
-    for file_name in curdir.glob("**/output.txt"):
+    #for file_name in curdir.glob("**/output.txt"):
+    for file_name in curdir.glob("output.txt"):
         print(file_name)
         po = ProcessOutput()
         po.process_output(file_name)

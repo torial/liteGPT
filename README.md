@@ -7,16 +7,16 @@ Changes made from the original video version of the nanoGPT code include:
 * Adding CUDA support
 * Added mixed precision support (Autocast with GradScalar) - about 45% speed up from initial CUDA support.
 * Added CUDA auto tuning, which improved performance ~10% on the development laptop.
-* Ability to adjust hyper parameters to mimic other GPT models (GPT-3 sizes do not run on the development laptop, which only has 8 GB GPU)
-* Support for phased analysis of various hyper parameters
+* Ability to adjust hyperparameters to mimic other GPT models (GPT-3 sizes do not run on the development laptop, which only has 8 GB GPU)
+* Support for phased analysis of various hyperparameters
 
 ---
 ## Experimentation Phases
-To explore hyper parameters impact on the GPT framework, four phases were run against a novella (which has 112,191 letters in length):
-1) 1316 hyper parameter permutations for 500 iterations of training time. Models are between 112K and 42.7M parameters. 
-2) From the 50 best experiments, the hyper parameters were narrowed down to 320 permutations running for 1,500 iterations of training.  Models are between 3.6M and 42.7M parameters.
+To explore hyperparameters impact on the GPT framework, four phases were run against a novella (which has 112,191 letters in length):
+1) 1316 hyperparameter permutations for 500 iterations of training time. Models are between 112K and 42.7M parameters. 
+2) From the 50 best experiments, the hyperparameters were narrowed down to 320 permutations running for 1,500 iterations of training.  Models are between 3.6M and 42.7M parameters.
 3) From the best of those experiments, 45 permutations running for 5,000 iterations.  Models are between 12.7M and 42.7M parameters.
-4) 8 permutations of the best hyper parameter settings for 10,000 iterations.  Models are between 19M and 42.7M parameters.
+4) 8 permutations of the best hyperparameter settings for 10,000 iterations.  Models are between 19M and 42.7M parameters.
 
 ## Training Loss
 ### By Learning Rate
@@ -38,14 +38,14 @@ Based on the constraints (the number of heads is 1/64th of the embedding size) t
 6 Layers were slightly better than 4 layers.
 ![Layers Comparision](charts/training_loss_by_layers.png)
 
-## Hyper Parameter Feature Importance for Training Loss
+## hyperparameter Feature Importance for Training Loss
 Learning Rates and Embeddings/Heads are most important for quality.
-![Hyper Parameter Feature Importance](charts/consolidated_hyper_parameter_importance.png)
+![hyperparameter Feature Importance](charts/consolidated_hyper_parameter_importance.png)
 
-## Hyper Parameter Feature Importance for Training Loss and Training Time
+## hyperparameter Feature Importance for Training Loss and Training Time
 Learning Rates, Batch Size, and Layers have the most impact on training on time.  This suggest to that to find the best quality training time,
 Learning Rate and Embeddings should be as higher, but Batch Size and Layers should be lower.
-![Hyper Parameter Feature Importance](charts/consolidated_hyper_parameter_importance_including_training_time.png)
+![hyperparameter Feature Importance](charts/consolidated_hyper_parameter_importance_including_training_time.png)
 
 ## Visualizing the meaning of Training Loss
 | Phase | Loss | Generated Text (100 Characters)                                                                                   |
@@ -76,8 +76,18 @@ enough differences exist between the first 90% and last 10% of a story that over
 
 ![Validation Loss Example](charts/validation_loss_by_lr.png)
 
+## Smaller Model Evaluation
+Two phases of smaller models were evaluated.  The batch, layer, and block sizes were set to the smallest of the hyperparameter values previously experimented on (32, 2, and 32 respectively).
+
+Of note is that with these smaller sizes of batch, layer, and block, some overfitting was observed in the generated text, such as identical quoting of multiple phrases in the training text.
+
+![Small Model Training Loss](charts/training_loss_by_learning_rate_small_phase2.png)
+
+![Small Model Validation Loss](charts/validation_loss_by_learning_rate_small_phase2.png)
+
 ## Next Steps
 - [ ] Try low parameter count models for longer iterations
+- [ ] Explore cleaning input
 - [ ] Explore Quantization
 - [ ] Explore strategies for training LLM on a single GPU
 - [ ] Explore a larger corpus
