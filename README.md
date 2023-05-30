@@ -85,8 +85,15 @@ Of note is that with these smaller sizes of batch, layer, and block, some overfi
 
 ![Small Model Validation Loss](charts/validation_loss_by_learning_rate_small_phase2.png)
 
+## Input Cleanup
+* Fixed text breakages (sometimes Drop Cap caused text reordering)
+* Text wraps based on original PDF, not at natural breaks such as paragraphs.
+* Removed author's name (which started at each odd page header)
+* Removed chapter title (which started at each even page)
+* Standardized double quotes (got rid of smart quotes)
+
 ## Next Steps
-- [ ] Try low parameter count models for longer iterations
+- [x] Try low parameter count models for longer iterations
 - [ ] Explore cleaning input
 - [ ] Explore Quantization
 - [ ] Explore strategies for training LLM on a single GPU
